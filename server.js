@@ -11,8 +11,6 @@ const PORT = process.env.PORT || 3000;
 
 app.use(logger("dev"));
 
-const db = require("./models");
-const routes = require("./routes");
 
 //middleware
 app.use(express.urlencoded({ extended: true }));
@@ -23,14 +21,16 @@ app.use(express.static("public"));
 
 //access database
 mongoose
-.connect(
-    process.env.MONGODB_URI || "mongodb://localhost/Fitness-Tracker_db", 
+  .connect(
+    process.env.MONGODB_URI || "mongodb://localhost/" + databaseName,
     {
-        useNewUrlParser: true,
-        useUnifiedTopology: true 
+      useNewUrlParser: true,
+      useUnifiedTopology: true
     })
-    .then(() => console.log(`successfully connected to database: ${databaseName}`));
+  .then(() => console.log(`successfully connected to database: ${databaseName}`));
 
+const routes = require("./routes");
+app.use(routes)
 
 //listen to port
 app.listen(PORT, () => {
