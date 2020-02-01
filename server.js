@@ -29,6 +29,7 @@ mongoose
     })
   .then(() => console.log(`successfully connected to database: ${databaseName}`));
 
+  //access routes 
 const routes = require("./routes");
 app.use(routes)
 
