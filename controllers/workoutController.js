@@ -10,22 +10,28 @@ module.exports = {
             //if error, show status 404
             .catch(err => res.sendStatus(404).json(err))
     },
+    createWorkout: ({ body }, res) => {
+        //creates a workout array of different exercises
+        db.Workout.create(req.body)
+       //return as json object
+        .then(response=> res.json(response))
+        
+        .catch(err => res.sendStatus(404).json(err))
+     },
     addExercise: ({ body, params }, res) => {
-        //find or update an excercise  by id
-        db.Workout.findByIdAndUpdate(params.id, body)
+        //find or update an excercise by id
+        db.Workout.findByIdAndUpdate(params.id, {
+            //adds the exercises to the workout array
+            $push: {exercises: body},
+        },
+        { new:true})
             //then return it as json object
             .then(response => res.json(response))
             .catch(err => res.sendStatus(404).json(err))
     },
-    createWorkout: ({ body }, res) => {
-        //creates an excercise
-        db.Workout.create(body)
-            //request for the di
-            .then(dbExcercise => res.json(dbExcercise))
-            .catch(err => res.sendStatus(404).json(err))
-     },
+   
     getWorkoutsInRange: ({ body }, res) => {
-        //not sure what the range is...
+        //find all the range of each exercise (duration, weight, reps, sets)
         db.Workout.find({})
         .then(response => res.json(response))
         .catch(err => res.sendStatus(404).json(err))

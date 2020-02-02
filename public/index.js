@@ -50,8 +50,8 @@ function handleWorkoutTypeChange(event) {
 
 function validateInputs() {
   let isValid = true;
-  // TODO
-  if (workoutType === "resistance") {
+  
+    if (workoutType === "resistance") {
     if (nameInput.value.trim() === "") {
       isValid = false;
     }
