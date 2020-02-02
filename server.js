@@ -22,7 +22,7 @@ app.use(express.static("public"));
 //access database
 mongoose
   .connect(
-    process.env.MONGODB_URI || "mongodb://localhost/" + databaseName,
+    process.env.MONGODB_URI || "mongodb://localhost/Fitness-Tracker_db",
     {
       useNewUrlParser: true,
       useUnifiedTopology: true
