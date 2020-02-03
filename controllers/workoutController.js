@@ -23,8 +23,7 @@ module.exports = {
         db.Workout.findByIdAndUpdate(params.id, {
             //adds the exercises to the workout array
             $push: {exercises: body},
-        },
-        { new:true})
+        })
             //then return it as json object
             .then(response => res.json(response))
             .catch(err => res.sendStatus(404).json(err))
